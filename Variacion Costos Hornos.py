@@ -469,7 +469,7 @@ st.info("""
 
     Realiza el cálculo de desvío, participación e impacto entre los costos, y genera dos hojas de salida:
     1.  **'Costos_procesado'**: Con todos los detalles y valores estáticos para los campos establecidos
-    2.  **'Consolidado_Impactos'**: Resumen con los resultados finales, vinculados mediante fórmulas a la hoja procesada.
+    2.  **'Consolidado_Impactos'**: Resumen con los resultados finales.
 
     ⚠️ **Importante**: Asegúrese de que las hojas de origen y destino existan en el archivo original.
 """)
@@ -500,6 +500,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
