@@ -48,7 +48,7 @@ def apply_excel_formatting(wb, sheet_name):
         fill_variacion_blue = PatternFill(start_color='DDEBF7', end_color='DDEBF7', fill_type='solid')
         fill_impacto_green = PatternFill(start_color='E2F0D9', end_color='E2F0D9', fill_type='solid')
         font_black_bold = Font(color="000000", bold=True)
-        currency_format = '#,##0.00'
+        currency_format = '#,##0'
 
         if sheet_name not in wb.sheetnames:
             st.warning(f"Advertencia: La hoja '{sheet_name}' no se encontró para aplicar formato.")
@@ -501,6 +501,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
