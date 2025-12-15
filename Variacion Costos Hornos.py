@@ -42,9 +42,6 @@ border_right = Border(right=side_medium)
 
 # --- FUNCIÓN 1: Aplicar Formato a la Hoja Procesada (AJUSTADA PARA USAR WORKBOOK) ---
 def apply_excel_formatting(wb, sheet_name):
-    """Aplica formato de porcentaje, color a los encabezados, negrita, bordes de bloque y moneda."""
-    # ... [El cuerpo de esta función se mantiene *exactamente igual* que el original, 
-    #     pero recibe el `Workbook` de openpyxl en lugar de la ruta del archivo]
     try:
         # --- Configuración de Estilos ---
         fill_actual_orange = PatternFill(start_color='FCE4D6', end_color='FCE4D6', fill_type='solid')
@@ -135,12 +132,7 @@ def apply_excel_formatting(wb, sheet_name):
 
 # --- FUNCIÓN 2: Aplicar Fórmulas Dinámicas al Consolidado (AJUSTADA PARA USAR WORKBOOK) ---
 def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_name, df_output_headers, df_consolidado_headers):
-    """
-    Remplaza los valores estáticos en la hoja consolidada con fórmulas 
-    de Excel que referencian a la hoja procesada.
-    """
-    # ... [El cuerpo de esta función se mantiene *exactamente igual* que el original, 
-    #     pero recibe el `Workbook` de openpyxl en lugar de la ruta del archivo]
+    
     try:
         
         if consolidated_sheet_name not in wb.sheetnames:
@@ -163,6 +155,7 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
         for col_idx_con, col_name_con in enumerate(df_consolidado_headers):
             
             # Obtener el índice de la columna en la hoja de origen (df_output)
+            
             col_name_source = col_name_con 
             source_col_idx = header_map.get(col_name_source)
             
@@ -173,6 +166,7 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
             source_col_letter = get_column_letter(source_col_idx)
             
             # Aplicar formato de encabezado (negrita y color)
+            
             header_cell = ws_consolidado.cell(row=1, column=col_idx_con + 1)
             header_cell.font = font_black_bold
             if 'Impacto' in col_name_con:
@@ -200,14 +194,10 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
         st.error(f"❌ Error al aplicar las fórmulas de Excel con openpyxl: {e}")
         return
 
-# --- FUNCIÓN 3: Escritura y Formateo de la Hoja Procesada con Fórmulas (AJUSTADA PARA USAR WORKBOOK) ---
+# --- FUNCIÓN 3: Escritura y Formateo de la Hoja Procesada con Fórmulas
+
 def write_processed_sheet_with_formulas(wb, sheet_name, df_data, cost_names_internal, output_cost_names, initial_cols):
-    """
-    Escribe el DataFrame en una hoja de Excel, insertando fórmulas celda por celda
-    y manteniendo la posición original de la hoja en el libro.
-    """
-    # ... [El cuerpo de esta función se mantiene *exactamente igual* que el original, 
-    #     pero recibe el `Workbook` de openpyxl en lugar de la ruta del archivo]
+
     try:
         
         # 1. Determinar la posición (índice) de la hoja procesada
@@ -337,9 +327,6 @@ def write_processed_sheet_with_formulas(wb, sheet_name, df_data, cost_names_inte
 
 # --- FUNCIÓN PRINCIPAL DE PROCESAMIENTO ---
 def process_excel_data(uploaded_file):
-    """
-    Función principal que envuelve toda la lógica original.
-    """
     
     # 1. Carga del archivo a un objeto BytesIO y a DataFrames de pandas
     try:
@@ -425,7 +412,7 @@ def process_excel_data(uploaded_file):
         apply_excel_formatting(wb, HOJA_PROCESADA)
 
         # -------------------------------------------------------------------------------------
-        # --- 6.5. PREPARACIÓN Y ESCRITURA DEL CONSOLIDADO (Creación de la hoja si no existe) ---
+        # --- 6.5. PREPARACIÓN Y ESCRITURA DEL CONSOLIDADO 
         # -------------------------------------------------------------------------------------
         
         cols_consolidado = [CLAVE_MERGE, 'Texto breve material', 'Result actualizado', 'Resultado anterior', '% Variacion Resultado']
@@ -513,4 +500,5 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
