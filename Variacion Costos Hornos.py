@@ -130,9 +130,12 @@ def apply_excel_formatting(wb, sheet_name):
         st.error(f"❌ Error al aplicar el formato de Excel con openpyxl: {e}")
 
 
-# --- FUNCIÓN 2: Aplicar Fórmulas Dinámicas al Consolidado (AJUSTADA PARA USAR WORKBOOK) ---
+# --- FUNCIÓN 2: Aplicar Fórmulas Dinámicas al Consolidado (AJUSTADA Y CORREGIDA) ---
 def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_name, df_output_headers, df_consolidado_headers):
-    
+    """
+    Remplaza los valores estáticos en la hoja consolidada con fórmulas 
+    de Excel que referencian a la hoja procesada, asegurando el formato de porcentaje.
+    """
     try:
         
         if consolidated_sheet_name not in wb.sheetnames:
@@ -155,7 +158,6 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
         for col_idx_con, col_name_con in enumerate(df_consolidado_headers):
             
             # Obtener el índice de la columna en la hoja de origen (df_output)
-            
             col_name_source = col_name_con 
             source_col_idx = header_map.get(col_name_source)
             
@@ -166,7 +168,6 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
             source_col_letter = get_column_letter(source_col_idx)
             
             # Aplicar formato de encabezado (negrita y color)
-            
             header_cell = ws_consolidado.cell(row=1, column=col_idx_con + 1)
             header_cell.font = font_black_bold
             if 'Impacto' in col_name_con:
@@ -183,12 +184,13 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
                 cell.value = formula
                 
                 # Aplicar formato de número
-                if 'Result' in col_name_con:
-                    cell.number_format = currency_format
-                elif '%' in col_name_con or 'Impacto' in col_name_con:
+                # Priorizamos las columnas de porcentaje/impacto para evitar conflictos de formato.
+                if col_name_con == '% Variacion Resultado' or 'Impacto' in col_name_con:
                     cell.number_format = percentage_format
+                elif 'Result' in col_name_con:
+                    cell.number_format = currency_format
                     
-        
+        st.success(f"✅ Fórmulas de vinculación dinámica y formato correcto aplicados a la hoja '{consolidated_sheet_name}'.")
 
     except Exception as e:
         st.error(f"❌ Error al aplicar las fórmulas de Excel con openpyxl: {e}")
@@ -500,6 +502,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
