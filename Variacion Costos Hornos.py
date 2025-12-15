@@ -127,7 +127,7 @@ def apply_excel_formatting(wb, sheet_name):
                 cell.border = Border(right=side_medium, top=current_border.top,  
                                      bottom=current_border.bottom, left=current_border.left)
         
-        st.success(f"✅ Formato de Excel (colores, negrita, bordes de columna completa, moneda y **enteros**) aplicado a la hoja '{sheet_name}'.")
+        
 
     except Exception as e:
         st.error(f"❌ Error al aplicar el formato de Excel con openpyxl: {e}")
@@ -194,7 +194,7 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
                 elif '%' in col_name_con or 'Impacto' in col_name_con:
                     cell.number_format = percentage_format
                     
-        st.success(f"✅ Fórmulas de vinculación dinámica aplicadas a la hoja '{consolidated_sheet_name}'.")
+        
 
     except Exception as e:
         st.error(f"❌ Error al aplicar las fórmulas de Excel con openpyxl: {e}")
@@ -419,7 +419,7 @@ def process_excel_data(uploaded_file):
             st.error("\nEl script se detuvo debido a un error al escribir la hoja procesada.")
             return None, None
             
-        st.info(f"\n✅ Proceso de datos estáticos completado. Se ha preparado la hoja '{HOJA_PROCESADA}' con fórmulas Excel.")
+        
         
         # 6.2 Aplicar formato a la hoja de PROCESADO
         apply_excel_formatting(wb, HOJA_PROCESADA)
@@ -513,3 +513,4 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
