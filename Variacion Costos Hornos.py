@@ -461,7 +461,7 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-st.title("📊 Procesador de Costos e Impactos Excel")
+st.title("📊 Automatización: Cálculo de la variación de costos")
 st.markdown("---")
 
 st.info("""
@@ -500,6 +500,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
