@@ -148,7 +148,7 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
         header_map = {col_name: idx + 1 for idx, col_name in enumerate(df_output_headers)}
         
         # 2. Definir formato de porcentaje y moneda para el Consolidado
-        currency_format = '#,##0.00'
+        currency_format = '#,##0'
         percentage_format = '0.00%'
         font_black_bold = Font(color="000000", bold=True)
         fill_impacto_green = PatternFill(start_color='E2F0D9', end_color='E2F0D9', fill_type='solid')
@@ -501,6 +501,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
