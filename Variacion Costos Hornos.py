@@ -190,7 +190,6 @@ def apply_consolidation_formulas(wb, processed_sheet_name, consolidated_sheet_na
                 elif 'Result' in col_name_con:
                     cell.number_format = currency_format
                     
-        st.success(f"✅ Fórmulas de vinculación dinámica y formato correcto aplicados a la hoja '{consolidated_sheet_name}'.")
 
     except Exception as e:
         st.error(f"❌ Error al aplicar las fórmulas de Excel con openpyxl: {e}")
@@ -502,6 +501,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
