@@ -496,9 +496,10 @@ if uploaded_file is not None:
                 file_name=output_filename,
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-            st.balloons()
+        
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
