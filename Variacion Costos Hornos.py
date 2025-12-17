@@ -8,8 +8,8 @@ from openpyxl.utils import get_column_letter
 import io
 
 # --- 1. Configuración de Constantes y Nombres ---
-HOJA_ACTUAL = 'Costos Mqlla H5 ACTUAL'
-HOJA_ANTERIOR = 'Costos Mqlla H5 ANTERIOR'
+HOJA_ACTUAL = 'Costos ACTUAL'
+HOJA_ANTERIOR = 'Costos ANTERIOR'
 HOJA_PROCESADA = 'Costos_procesado'
 HOJA_CONSOLIDADO = 'Consolidado_Impactos'
 
@@ -501,6 +501,7 @@ if uploaded_file is not None:
         else:
 
             st.error("El procesamiento falló. Revise los mensajes de error anteriores.")
+
 
 
 
